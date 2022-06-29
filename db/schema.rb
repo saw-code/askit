@@ -10,10 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_21_080255) do
+ActiveRecord::Schema.define(version: 2022_06_24_121655) do
 
   create_table "answers", force: :cascade do |t|
-    t.text "body", null: false # 88
+    t.text "body", null: false
     t.integer "question_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -21,8 +21,8 @@ ActiveRecord::Schema.define(version: 2022_06_21_080255) do
   end
 
   create_table "questions", force: :cascade do |t|
-    t.string "title", null: false # 88
-    t.text "body", null: false # 88
+    t.string "title", null: false
+    t.text "body", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 2022_06_21_080255) do
     t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "remember_token_digest"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 

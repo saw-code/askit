@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AnswersController < ApplicationController
   before_action :set_question!
   before_action :set_answer!, except: :create
@@ -22,9 +24,7 @@ class AnswersController < ApplicationController
     end
   end
 
-  def edit
-  end
-
+  def edit; end
 
   def destroy
     @answer.destroy
@@ -46,5 +46,3 @@ class AnswersController < ApplicationController
     @answer = @question.answers.find(params[:id])
   end
 end
-
-

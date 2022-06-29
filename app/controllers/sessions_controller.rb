@@ -1,25 +1,36 @@
+# frozen_string_literal: true
+
 class SessionsController < ApplicationController
   before_action :require_no_authentication, only: %i[new create]
   before_action :require_authentication, only: :destroy # 111
 
-  def show
-  end
+  def show; end
 
-  def create #104
+  # 104б 152
+  def create
     user = User.find_by(email: params[:email])
     if user&.authenticate(params[:password])
-      sign_in(user)
-      flash[:success] = "Welcome back, #{current_user.name_or_email}!"
-      redirect_to root_path
+      do_sign_in(user)
     else
-      flash[:warning] = 'Incorrect email and/or password'
-      redirect_to new_session_path
+      flash.now[:warning] = 'Incorrect email and/or password'
+      render :new
     end
   end
 
-  def destroy # 109
+  # 109
+  def destroy
     sign_out
-    flash[:success] = "See you later!"
+    flash[:success] = 'See you later!'
+    redirect_to root_path
+  end
+
+  private
+
+  # 152
+  def do_sign_in(user)
+    sign_in(user)
+    remember(user) if params[:remember_me] == '1' # 135
+    flash[:success] = "Welcome back, #{current_user.name_or_email}!"
     redirect_to root_path
   end
 end
